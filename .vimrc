@@ -10,12 +10,17 @@ colorscheme lucius
 set nu "set line numbers
 set runtimepath+=$HOME/vimfiles/plugin
 syntax on
-autocmd FileType python nnoremap <buffer> <F6> :exec '!python' @%<cr>
+autocmd FileType python nnoremap <buffer> <F6> :w <CR> :!clear <CR> :exec '!python' @%<cr>
 autocmd FileType gnuplot nnoremap <buffer> <F6> :exec '!gnuplot' @%<cr>
-autocmd FileType c nnoremap <buffer> <F5> :w <CR> :!gcc % -o %< <CR>
-autocmd FileType c nnoremap <buffer> <F6> :w <CR> :!gcc % -o %< && %< <CR>
+autocmd FileType c nnoremap <buffer> <F5> :w <CR> :!clear <CR> :!gcc % -o %< <CR>
+autocmd FileType c nnoremap <buffer> <F6> :w <CR> :!clear <CR> :!gcc % -o %< <CR> :!./%< <CR>
+autocmd FileType c nnoremap <buffer> <F8> :w <CR> :!clear <CR> :!gcc % -g -o %< <CR> :!gdb %< <CR>
 autocmd FileType tex colorscheme github
 autocmd FileType tex set spell
 
 :imap jj <Esc>
 :nnoremap <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
+:nnoremap gf <C-z>
+:nnoremap tl  :tabnext<CR>
+:nnoremap th  :tabprev<CR>
+:set showcmd
